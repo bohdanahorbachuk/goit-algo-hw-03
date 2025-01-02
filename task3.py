@@ -1,14 +1,17 @@
 import re
 
 def normalize_phone(phone_number):
+    # Видаляємо всі символи, крім цифр і знаку '+'
     phone_number = re.sub(r'[^\d+]', '', phone_number.strip())
     
-    
+    # Перевіряємо наявність міжнародного коду
     if not phone_number.startswith('+'):
+        # Якщо номер починається з '380', додаємо '+'
         if phone_number.startswith('380'):
-            phone_number = '+' + phone_number[1:]  
+            phone_number = '+' + phone_number
         else:
-            phone_number = '+38' + phone_number.lstrip('0')  
+            # Якщо міжнародного коду немає, додаємо '+38'
+            phone_number = '+38' + phone_number.lstrip('0')
     
     return phone_number
 
