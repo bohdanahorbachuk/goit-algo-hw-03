@@ -6,15 +6,16 @@ def normalize_phone(phone_number):
     
     # Перевіряємо наявність міжнародного коду
     if not phone_number.startswith('+'):
-        # Якщо номер починається з '380', додаємо '+'
-        if phone_number.startswith('380'):
+        if phone_number.startswith('380'):  # Якщо номер починається з '380', додаємо '+'
             phone_number = '+' + phone_number
-        else:
-            # Якщо міжнародного коду немає, додаємо '+38'
-            phone_number = '+38' + phone_number.lstrip('0')
+        elif phone_number.startswith('0'):  # Якщо номер починається з '0', додаємо '+38'
+            phone_number = '+38' + phone_number[1:]
+        else:  # Якщо немає '380' або '0', просто додаємо '+38'
+            phone_number = '+38' + phone_number
     
     return phone_number
 
+# Вхідні дані
 raw_numbers = [
     "067\\t123 4567",
     "(095) 234-5678\\n",
@@ -27,5 +28,6 @@ raw_numbers = [
     "38050 111 22 11   ",
 ]
 
+# Нормалізовані номери
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
 print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)

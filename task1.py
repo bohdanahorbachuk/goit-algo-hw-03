@@ -2,14 +2,18 @@ from datetime import datetime
 
 def get_days_from_today(date):
     try:
-        given_date = datetime.strptime(date, "%Y-%m-%d")
+        # Перетворення рядка у формат дати
+        given_date = datetime.strptime(date, "%Y-%m-%d").date()
         
-        today = datetime.today()
+        # Отримання поточної дати без часу
+        today = datetime.today().date()
         
-        difference = abs((given_date - today)).days
+        # Обчислення різниці в днях
+        difference = (given_date - today).days
         return difference
     except ValueError:
         print("Неправильний формат дати. Використовуйте 'РРРР-ММ-ДД'.")
         return None
 
-print(get_days_from_today("2021-10-09"))
+# Приклад використання
+print(get_days_from_today("2025-01-04"))  
