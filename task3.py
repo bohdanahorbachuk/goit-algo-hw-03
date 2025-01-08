@@ -9,10 +9,10 @@ def normalize_phone(phone_number):
         if phone_number.startswith('380'):  # Якщо номер починається з '380', додаємо '+'
             phone_number = '+' + phone_number
         elif phone_number.startswith('0'):  # Якщо номер починається з '0', додаємо '+38'
-            phone_number = '+38' + phone_number[1:]
-        else:  # Якщо немає '380' або '0', просто додаємо '+38'
             phone_number = '+38' + phone_number
-    
+        elif phone_number.startswith(''):  # Якщо номер починається з цифри, додаємо '+38'
+            phone_number = '+38' + phone_number
+        
     return phone_number
 
 # Вхідні дані
@@ -31,3 +31,4 @@ raw_numbers = [
 # Нормалізовані номери
 sanitized_numbers = [normalize_phone(num) for num in raw_numbers]
 print("Нормалізовані номери телефонів для SMS-розсилки:", sanitized_numbers)
+
